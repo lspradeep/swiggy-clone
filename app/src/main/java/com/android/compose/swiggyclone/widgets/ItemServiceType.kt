@@ -6,10 +6,12 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.CornerSize
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -31,25 +33,26 @@ fun ItemServiceType(
     ) {
         Box(
             modifier = modifier
+                .clip(shape = RoundedCornerShape(16.dp))
                 .border(
                     shape = CircleShape.copy(all = CornerSize(16.dp)),
                     border = BorderStroke(1.dp, color = grey)
                 )
                 .width(100.dp)
                 .height(100.dp)
-                .padding(4.dp)
         ) {
             Image(
                 painter = painterResource(id = R.drawable.img_service_type_placeholder),
                 contentDescription = "",
-                contentScale = ContentScale.Crop
+                contentScale = ContentScale.Crop,
+                modifier = modifier.clip(shape = RoundedCornerShape(16.dp))
             )
 
             Text(
                 text = serviceName,
                 style = Typography.body2.copy(fontWeight = FontWeight.Bold),
                 textAlign = TextAlign.Center,
-                modifier = modifier.fillMaxWidth()
+                modifier = modifier.fillMaxWidth().padding(4.dp)
             )
         }
         Text(

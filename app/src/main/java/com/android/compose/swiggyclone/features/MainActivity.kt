@@ -3,12 +3,11 @@ package com.android.compose.swiggyclone.features
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.material.*
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
@@ -21,6 +20,7 @@ import com.android.compose.swiggyclone.ui.theme.SwiggyCloneTheme
 import com.android.compose.swiggyclone.ui.theme.Typography
 import com.android.compose.swiggyclone.ui.theme.greyLight
 import com.android.compose.swiggyclone.widgets.ItemServiceType
+import com.android.compose.swiggyclone.widgets.OfferBannerTypeOne
 
 class MainActivity : ComponentActivity() {
 
@@ -54,7 +54,7 @@ class MainActivity : ComponentActivity() {
                                     }
                                 }//end service type
 
-
+                                OfferBannerTypeOne(modifier = modifier)
                             }
                         }
                     }
