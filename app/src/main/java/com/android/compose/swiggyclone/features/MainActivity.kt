@@ -16,11 +16,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.android.compose.swiggyclone.R
+import com.android.compose.swiggyclone.SwiggyCloneApp
 import com.android.compose.swiggyclone.ui.theme.SwiggyCloneTheme
 import com.android.compose.swiggyclone.ui.theme.Typography
 import com.android.compose.swiggyclone.ui.theme.greyLight
+import com.android.compose.swiggyclone.widgets.EmptySpace
 import com.android.compose.swiggyclone.widgets.ItemServiceType
-import com.android.compose.swiggyclone.widgets.OfferBannerTypeOne
+import com.android.compose.swiggyclone.widgets.ItemBannerTypeOne
+import com.android.compose.swiggyclone.widgets.ItemRestaurantSmall
 
 class MainActivity : ComponentActivity() {
 
@@ -36,7 +39,9 @@ class MainActivity : ComponentActivity() {
                             item {
                                 Divider(color = greyLight)
 
-                                LazyRow(modifier = modifier.padding(top = 8.dp)) {
+                                EmptySpace(modifier = modifier)
+
+                                LazyRow {
                                     item {
                                         listOf(
                                             "Restaurant",
@@ -54,7 +59,31 @@ class MainActivity : ComponentActivity() {
                                     }
                                 }//end service type
 
-                                OfferBannerTypeOne(modifier = modifier)
+                                EmptySpace(modifier = modifier)
+
+                                ItemBannerTypeOne(modifier = modifier)
+
+                                EmptySpace(modifier = modifier)
+
+                                LazyRow {
+                                    item {
+                                        listOf(
+                                            Triple("Muniyandi Vilas", "20 mins", 30),
+                                            Triple("Lamia Multicuisine", "24 mins", 20),
+                                            Triple("Meat and Eat", "35 mins", 10),
+                                            Triple("KFC", "25 mins", 30),
+                                            Triple("Muniyandi Vilas", "20 mins", 30),
+                                            Triple("Lamia Multicuisine", "24 mins", 20),
+                                            Triple("Meat and Eat", "35 mins", 10),
+                                            Triple("KFC", "25 mins", 30),
+                                        ).forEach { restaurant ->
+                                            ItemRestaurantSmall(
+                                                modifier = modifier, restaurant = restaurant
+                                            )
+                                        }
+                                    }
+                                }
+
                             }
                         }
                     }
@@ -99,18 +128,5 @@ private fun SetUpToolbar(modifier: Modifier) {
 fun App(content: @Composable () -> Unit) {
     SwiggyCloneTheme {
         content()
-    }
-}
-
-@Composable
-fun Greeting(name: String) {
-    Text(text = "Hello $name!")
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    SwiggyCloneTheme {
-        Greeting("Android")
     }
 }

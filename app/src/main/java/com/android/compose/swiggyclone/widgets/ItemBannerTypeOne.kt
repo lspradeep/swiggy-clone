@@ -6,25 +6,21 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.ArrowRight
 import androidx.compose.material.icons.rounded.NavigateNext
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Brush
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.android.compose.swiggyclone.ui.theme.*
 import com.android.compose.swiggyclone.R
 
 @Composable
-fun OfferBannerTypeOne(modifier: Modifier) {
-    Box(modifier.padding(8.dp)) {
+fun ItemBannerTypeOne(modifier: Modifier) {
+    Box(modifier.padding(start = 8.dp, end = 8.dp)) {
         Row(
             modifier
                 .fillMaxWidth()
@@ -67,7 +63,7 @@ fun OfferBannerTypeOne(modifier: Modifier) {
             }
 
             Image(
-                painter = painterResource(id = R.drawable.burger),
+                painter = painterResource(id = R.drawable.img_burger),
                 contentDescription = "",
                 modifier = modifier
                     .align(Alignment.CenterVertically)
