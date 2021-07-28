@@ -3,6 +3,7 @@ package com.android.compose.swiggyclone.features
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -20,10 +21,7 @@ import com.android.compose.swiggyclone.SwiggyCloneApp
 import com.android.compose.swiggyclone.ui.theme.SwiggyCloneTheme
 import com.android.compose.swiggyclone.ui.theme.Typography
 import com.android.compose.swiggyclone.ui.theme.greyLight
-import com.android.compose.swiggyclone.widgets.EmptySpace
-import com.android.compose.swiggyclone.widgets.ItemServiceType
-import com.android.compose.swiggyclone.widgets.ItemBannerTypeOne
-import com.android.compose.swiggyclone.widgets.ItemRestaurantSmall
+import com.android.compose.swiggyclone.widgets.*
 
 class MainActivity : ComponentActivity() {
 
@@ -35,7 +33,7 @@ class MainActivity : ComponentActivity() {
                 Scaffold(
                     topBar = { SetUpToolbar(modifier) },
                     content = {
-                        LazyColumn {
+                        LazyColumn(contentPadding = PaddingValues(8.dp)) {
                             item {
                                 Divider(color = greyLight)
 
@@ -53,7 +51,8 @@ class MainActivity : ComponentActivity() {
                                         ).map { serviceName ->
                                             ItemServiceType(
                                                 modifier = modifier,
-                                                serviceName = serviceName
+                                                serviceName = serviceName,
+                                                description = "Enjoy Your favourite treats"
                                             )
                                         }
                                     }
@@ -65,6 +64,11 @@ class MainActivity : ComponentActivity() {
 
                                 EmptySpace(modifier = modifier)
 
+                                SectionTitle(title = "Restaurants You love")
+
+                                EmptySpace(modifier = modifier)
+
+                                //restaurants
                                 LazyRow {
                                     item {
                                         listOf(
@@ -83,6 +87,34 @@ class MainActivity : ComponentActivity() {
                                         }
                                     }
                                 }
+
+                                EmptySpace(modifier = modifier)
+
+                                SectionTitle(title = "Popular Curations")
+
+                                EmptySpace(modifier = modifier)
+
+                                LazyRow {
+                                    item {
+                                        listOf(
+                                            "Burgers",
+                                            "South Indian",
+                                            "Pure Veg",
+                                            "North Indian",
+                                            "Burgers",
+                                            "South Indian",
+                                            "Pure Veg",
+                                            "North Indian",
+                                        ).forEach { curationName ->
+                                            ItemPopularCuration(
+                                                modifier = modifier,
+                                                curationName = curationName
+                                            )
+                                        }
+                                    }
+                                }
+
+                                EmptySpace(modifier = modifier)
 
                             }
                         }

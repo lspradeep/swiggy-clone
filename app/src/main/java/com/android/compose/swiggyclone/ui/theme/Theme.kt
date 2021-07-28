@@ -1,5 +1,6 @@
 package com.android.compose.swiggyclone.ui.theme
 
+import android.app.StatusBarManager
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.darkColors
@@ -11,9 +12,11 @@ private val DarkColorPalette = darkColors(
     primaryVariant = primaryVariant,
     secondary = secondaryColor,
     secondaryVariant = secondaryVariant,
-    onPrimary = black,
     onSecondary = black,
-    background = white
+    background = white,
+    surface = white,
+    onSurface = black,
+    onPrimary = black
 )
 
 private val LightColorPalette = lightColors(
@@ -21,9 +24,11 @@ private val LightColorPalette = lightColors(
     primaryVariant = primaryVariant,
     secondary = secondaryColor,
     secondaryVariant = secondaryVariant,
-    onPrimary = black,
     onSecondary = black,
-    background = white
+    background = white,
+    surface = white,
+    onSurface = black,
+    onPrimary = black,
 
     /* Other default colors to override
     background = Color.White,
@@ -50,6 +55,6 @@ fun SwiggyCloneTheme(
         colors = colors,
         typography = Typography,
         shapes = Shapes,
-        content = content
+        content = content,
     )
 }

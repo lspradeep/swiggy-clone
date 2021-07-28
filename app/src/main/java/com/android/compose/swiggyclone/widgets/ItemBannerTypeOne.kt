@@ -20,7 +20,7 @@ import com.android.compose.swiggyclone.R
 
 @Composable
 fun ItemBannerTypeOne(modifier: Modifier) {
-    Box(modifier.padding(start = 8.dp, end = 8.dp)) {
+    Box {
         Row(
             modifier
                 .fillMaxWidth()

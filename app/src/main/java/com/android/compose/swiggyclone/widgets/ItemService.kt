@@ -25,11 +25,11 @@ import com.android.compose.swiggyclone.ui.theme.grey
 fun ItemServiceType(
     modifier: Modifier,
     serviceName: String,
-    description: String = "Enjoy Your favourite treats"
+    description: String
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = modifier.padding(8.dp)
+        modifier = modifier.padding(end = 10.dp)
     ) {
         Box(
             modifier = modifier
@@ -52,7 +52,9 @@ fun ItemServiceType(
                 text = serviceName,
                 style = Typography.body2.copy(fontWeight = FontWeight.Bold),
                 textAlign = TextAlign.Center,
-                modifier = modifier.fillMaxWidth().padding(4.dp)
+                modifier = modifier
+                    .fillMaxWidth()
+                    .padding(4.dp)
             )
         }
         Text(
