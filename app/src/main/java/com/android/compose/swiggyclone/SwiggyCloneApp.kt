@@ -1,12 +1,8 @@
 package com.android.compose.swiggyclone
 
 import android.app.Application
-import android.os.Build
-import android.util.Log
-import androidx.annotation.RequiresApi
-import java.io.File
-import java.nio.file.Files
-import java.nio.file.Paths
+import java.util.*
+
 
 class SwiggyCloneApp : Application() {
 
@@ -14,24 +10,18 @@ class SwiggyCloneApp : Application() {
         super.onCreate()
     }
 
-    companion object{
-//        fun getRandomImage() {
-//            Log.d("da", "getRandomImage")
-//            val drawableClass = R.drawable::class.java
-//            File("src/main/res/drawable").walk()
-//                .forEach {
-//                    Log.d("da", it.name)
-//                }
-//            val projectDirAbsolutePath = Paths.get("").toAbsolutePath().toString()
-//            val resourcesPath = Paths.get(projectDirAbsolutePath, "/src/main/res/drawable")
-//            Files.walk(resourcesPath)
-//                .filter { item -> Files.isRegularFile(item) }
-//                .filter { item -> item.toString().endsWith(".png") }
-//                .forEach { item -> println("filename: $item") }
-//
-////        val field = drawableClass.getDeclaredField(fileName)
-////        field.getInt(field)
-////        return field.getInt(field)
-//        }
+    fun getFoodImage(): Int {
+        val images = resources.obtainTypedArray(R.array.food_images_array)
+        val rand = Random()
+        val rndInt = rand.nextInt(images.length())
+        return images.getResourceId(rndInt, 0)
     }
+
+    fun getRandomImage(): Int {
+        val images = resources.obtainTypedArray(R.array.all_images_array)
+        val rand = Random()
+        val rndInt = rand.nextInt(images.length())
+        return images.getResourceId(rndInt, 0)
+    }
+
 }

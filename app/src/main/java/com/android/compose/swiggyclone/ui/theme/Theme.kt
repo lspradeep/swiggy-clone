@@ -3,9 +3,12 @@ package com.android.compose.swiggyclone.ui.theme
 import android.app.StatusBarManager
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.MaterialTheme.colors
 import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.SideEffect
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 private val DarkColorPalette = darkColors(
     primary = primaryColor,
@@ -16,7 +19,7 @@ private val DarkColorPalette = darkColors(
     background = white,
     surface = white,
     onSurface = black,
-    onPrimary = black
+    onPrimary = black,
 )
 
 private val LightColorPalette = lightColors(
@@ -45,6 +48,15 @@ fun SwiggyCloneTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable() () -> Unit
 ) {
+
+    val sysUiController = rememberSystemUiController()
+
+    SideEffect {
+        sysUiController.setSystemBarsColor(
+            color = white
+        )
+    }
+
     val colors = if (darkTheme) {
         DarkColorPalette
     } else {

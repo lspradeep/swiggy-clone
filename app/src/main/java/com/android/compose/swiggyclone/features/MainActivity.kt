@@ -44,7 +44,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 private fun SetUpToolbar(modifier: Modifier) {
     TopAppBar(
-        elevation = 0.dp
+        elevation = 4.dp,
     ) {
         Text(
             text = "Home",
@@ -124,8 +124,6 @@ fun App() {
                     contentPadding = PaddingValues(start=8.dp,end = 8.dp,top = 8.dp,bottom = 100.dp),
                 ) {
                     item {
-                        Divider(color = greyLight)
-
                         EmptySpace(modifier = modifier)
 
                         LazyRow {

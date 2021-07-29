@@ -20,56 +20,56 @@ import com.android.compose.swiggyclone.R
 
 @Composable
 fun ItemBannerTypeOne(modifier: Modifier) {
-    Box {
-        Row(
-            modifier
-                .fillMaxWidth()
-                .height(180.dp)
-                .clip(shape = RoundedCornerShape(16.dp))
-                .background(brush = Brush.horizontalGradient(colors = pinkGradiant), alpha = 0.6f)
+    Row(
+        modifier
+            .fillMaxWidth()
+            .height(180.dp)
+            .clip(shape = RoundedCornerShape(16.dp))
+            .background(brush = Brush.horizontalGradient(colors = pinkGradiant), alpha = 0.6f)
 
+    ) {
+        Column(
+            horizontalAlignment = Alignment.Start,
+            verticalArrangement = Arrangement.Center,
+            modifier = modifier
+                .padding(16.dp)
+                .fillMaxHeight()
+                .weight(0.6f)
         ) {
-            Column(
-                horizontalAlignment = Alignment.Start,
-                verticalArrangement = Arrangement.Center,
-                modifier = modifier
-                    .padding(16.dp)
-                    .fillMaxHeight()
-                    .weight(0.6f)
-            ) {
-                Text(
-                    text = "up to 60% off try new tastes".uppercase(),
-                    style = Typography.h6.copy(
-                        color = brown,
-                        fontWeight = FontWeight.Bold
-                    )
+            Text(
+                text = "up to 60% off try new tastes".uppercase(),
+                style = Typography.h6.copy(
+                    color = brown,
+                    fontWeight = FontWeight.Bold
                 )
+            )
 
-                Text(
-                    text = "Fresh offers to enjoy\nnew dishes everyday.",
-                    style = Typography.subtitle2.copy(
-                        color = brown,
-                    ),
-                    modifier = modifier.padding(top = 8.dp, bottom = 8.dp)
-                )
+            Text(
+                text = "Fresh offers to enjoy\nnew dishes everyday.",
+                style = Typography.subtitle2.copy(
+                    color = brown,
+                ),
+                modifier = modifier.padding(top = 8.dp, bottom = 8.dp)
+            )
 
-                Image(
-                    imageVector = Icons.Rounded.NavigateNext,
-                    contentDescription = "",
-                    modifier = modifier
-                        .background(shape = RoundedCornerShape(8.dp), color = white)
-                        .padding(4.dp),
-                )
-            }
+            Spacer(modifier = modifier.height(8.dp))
 
             Image(
-                painter = painterResource(id = R.drawable.img_burger),
+                imageVector = Icons.Rounded.NavigateNext,
                 contentDescription = "",
                 modifier = modifier
-                    .align(Alignment.CenterVertically)
-                    .weight(0.4f)
-                    .fillMaxHeight(),
+                    .background(shape = RoundedCornerShape(8.dp), color = white)
+                    .padding(start = 2.dp, end = 2.dp),
             )
         }
+
+        Image(
+            painter = painterResource(id = R.drawable.img_burger),
+            contentDescription = "",
+            modifier = modifier
+                .align(Alignment.CenterVertically)
+                .weight(0.4f)
+                .fillMaxHeight(),
+        )
     }
 }

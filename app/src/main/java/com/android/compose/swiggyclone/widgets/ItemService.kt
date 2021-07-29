@@ -13,11 +13,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.android.compose.swiggyclone.R
+import com.android.compose.swiggyclone.SwiggyCloneApp
 import com.android.compose.swiggyclone.ui.theme.Typography
 import com.android.compose.swiggyclone.ui.theme.grey
 
@@ -27,9 +28,12 @@ fun ItemServiceType(
     serviceName: String,
     description: String
 ) {
+    val context = LocalContext.current
+
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = modifier.padding(end = 10.dp)
+        modifier = modifier.padding(end = 10.dp),
+        verticalArrangement = Arrangement.Center
     ) {
         Box(
             modifier = modifier
@@ -42,7 +46,7 @@ fun ItemServiceType(
                 .height(100.dp)
         ) {
             Image(
-                painter = painterResource(id = R.drawable.img_service_type_placeholder),
+                painter = painterResource(id = (context.applicationContext as SwiggyCloneApp).getRandomImage()),
                 contentDescription = "",
                 contentScale = ContentScale.Crop,
                 modifier = modifier.clip(shape = RoundedCornerShape(16.dp))
@@ -63,7 +67,7 @@ fun ItemServiceType(
                 .padding(8.dp)
                 .width(90.dp),
             textAlign = TextAlign.Center,
-            style = Typography.caption,
+            style = Typography.body2.copy(fontWeight = FontWeight.Light),
             maxLines = 2
         )
     }
