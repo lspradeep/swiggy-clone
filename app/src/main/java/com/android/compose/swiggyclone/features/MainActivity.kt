@@ -29,7 +29,9 @@ import androidx.compose.ui.unit.dp
 import com.android.compose.swiggyclone.R
 import com.android.compose.swiggyclone.ui.theme.*
 import com.android.compose.swiggyclone.widgets.*
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
