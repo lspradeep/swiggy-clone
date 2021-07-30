@@ -9,6 +9,14 @@ buildscript {
         compose_version = '1.0.0'
     }
 
+    project.ext {
+        applicationId = "com.android.compose.swiggyclone"
+        minSdk = 21
+        targetSdk = 30
+        versionCode = 1
+        versionName = "1.0"
+    }
+
     repositories {
         google()
         mavenCentral()

@@ -3,16 +3,19 @@ plugins {
     id 'org.jetbrains.kotlin.android'
 }
 
+def localProperties = new Properties()
+localProperties.load(new FileInputStream(rootProject.file("local.properties")))
+
 android {
     compileSdk 30
     buildToolsVersion "31.0.0"
 
     defaultConfig {
-        applicationId "com.android.compose.swiggyclone"
-        minSdk 21
-        targetSdk 30
-        versionCode 1
-        versionName "1.0"
+        applicationId rootProject.applicationId
+        minSdk rootProject.minSdk
+        targetSdk rootProject.targetSdk
+        versionCode rootProject.versionCode
+        versionName rootProject.versionName
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -22,15 +25,22 @@ android {
 
     buildTypes {
         release {
+            buildConfigField 'String', "BASE_URL_IMG", '"https://api.pexels.com/v1/"'
+            buildConfigField 'String', "BASE_URL_VDO", '"https://api.pexels.com/videos/"'
+            buildConfigField 'String', "PEXELS_API_KEY", localProperties["PEXELS_API_KEY"]
+
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
-//        debug {
-//            minifyEnabled false
-//            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-//            applicationIdSuffix ".debug"
-//            isDebuggable true
-//        }
+        debug {
+            buildConfigField 'String', "BASE_URL_IMG", '"https://api.pexels.com/v1/"'
+            buildConfigField 'String', "BASE_URL_VDO", '"https://api.pexels.com/videos/"'
+            buildConfigField 'String', "PEXELS_API_KEY", localProperties["PEXELS_API_KEY"]
+
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            applicationIdSuffix ".debug"
+        }
 //
 //        /**
 //         * The `initWith` property allows you to copy configurations from other build types,
@@ -79,7 +89,7 @@ dependencies {
     implementation "androidx.compose.material:material-icons-core:$compose_version"
     implementation "androidx.compose.material:material-icons-extended:$compose_version"
     // Integration with activities
-    implementation "androidx.activity:activity-compose:1.3.0-rc02"
+    implementation "androidx.activity:activity-compose:1.3.0"
     // Integration with ViewModels
     implementation "androidx.lifecycle:lifecycle-viewmodel-compose:1.0.0-alpha07"
     // Integration with observables
@@ -91,4 +101,7 @@ dependencies {
 
     // UI Tests
     androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_version"
+
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
 }
