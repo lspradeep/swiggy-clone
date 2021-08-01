@@ -30,13 +30,14 @@ fun ItemRestaurantSmall(
     restaurant: Triple<String, String, Int>,
     imageUrl: String?
 ) {
-    val context = LocalContext.current
-    val itemMaxWidth = 65.dp
+    val itemMaxWidth = 75.dp
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = modifier.padding(end = 10.dp),
-        verticalArrangement = Arrangement.Center
+        modifier = modifier
+            .width(itemMaxWidth)
+            .padding(end = 10.dp),
+        verticalArrangement = Arrangement.Center,
     ) {
         Box {
             Image(
@@ -64,9 +65,7 @@ fun ItemRestaurantSmall(
 
         Text(
             text = restaurant.first, modifier = modifier
-                .padding(top = 4.dp)
-                .width(itemMaxWidth)
-                .align(alignment = Alignment.CenterHorizontally),
+                .padding(top = 4.dp),
             style = Typography.caption.copy(fontWeight = FontWeight.Bold), maxLines = 2,
             overflow = TextOverflow.Ellipsis
         )
@@ -74,7 +73,6 @@ fun ItemRestaurantSmall(
         Text(
             text = restaurant.second, modifier = modifier
                 .padding(top = 4.dp)
-                .width(itemMaxWidth)
                 .align(alignment = Alignment.Start),
             style = Typography.caption, maxLines = 1,
             overflow = TextOverflow.Ellipsis

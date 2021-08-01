@@ -2,10 +2,7 @@ package com.android.compose.swiggyclone.widgets
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.material.Text
@@ -27,16 +24,17 @@ fun ItemPopularCuration(
     curationName: String,
     imageUrl: String?
 ) {
-
+    val itemMaxWidth = 80.dp
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = modifier.padding(end = 10.dp)
+        modifier = modifier.padding(end = 10.dp),
+        verticalArrangement = Arrangement.Center
     ) {
         Image(
             painter = rememberImagePainter(imageUrl),
             contentDescription = "",
             modifier = modifier
-                .size(80.dp)
+                .size(itemMaxWidth)
                 .clip(CircleShape)
                 .background(color = white, shape = CircleShape.copy(CornerSize(25.dp))),
             contentScale = ContentScale.Crop
@@ -47,8 +45,6 @@ fun ItemPopularCuration(
             maxLines = 2,
             modifier = modifier
                 .padding(top = 8.dp)
-                .width(80.dp)
-                .align(alignment = Alignment.CenterHorizontally)
         )
     }
 }
