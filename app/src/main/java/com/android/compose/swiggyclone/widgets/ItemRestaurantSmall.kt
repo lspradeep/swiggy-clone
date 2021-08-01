@@ -28,7 +28,7 @@ fun ItemRestaurantSmall(
     restaurant: Restaurant,
     imageUrl: String?
 ) {
-    val itemMaxWidth = 80.dp
+    val itemMaxWidth = 70.dp
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -42,7 +42,7 @@ fun ItemRestaurantSmall(
                 rememberImagePainter(imageUrl),
                 contentDescription = "",
                 modifier = modifier
-                    .size(itemMaxWidth)
+                    .size(60.dp)
                     .clip(shape = RoundedCornerShape(8.dp)),
                 contentScale = ContentScale.Crop
             )

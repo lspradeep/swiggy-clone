@@ -69,8 +69,13 @@ fun ItemRestaurantRow(
 
                 HorizontalSpace(modifier = modifier)
 
-                Column(verticalArrangement = Arrangement.SpaceBetween) {
+                Column(verticalArrangement = Arrangement.SpaceEvenly) {
                     Text(text = restaurant.name, style = Typography.body2)
+
+                    Text(
+                        text = restaurant.cuisines,
+                        style = Typography.caption
+                    )
 
                     Text(
                         text = "${restaurant.place} | ${restaurant.kilometersAway}",
@@ -90,7 +95,11 @@ fun ItemRestaurantRow(
                         )
                     }
 
-                    Divider(modifier = modifier.fillMaxWidth(), color = greyDark)
+                    Divider(
+                        modifier = modifier
+                            .weight(1f)
+                            .height(1.dp)
+                    )
 
                     Row(verticalAlignment = Alignment.CenterVertically) {
                         Icon(

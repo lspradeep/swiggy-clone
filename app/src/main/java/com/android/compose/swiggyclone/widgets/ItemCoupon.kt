@@ -29,9 +29,9 @@ fun ItemCoupon(
 ) {
     Card(
         modifier = modifier
-            .padding(8.dp)
-            .width(180.dp)
-            .height(210.dp)
+            .padding(end = 8.dp)
+            .width(160.dp)
+            .height(180.dp)
             .border(width = 1.dp, color = grey),
     ) {
         Column(

@@ -5,8 +5,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Favorite
-import androidx.compose.material.icons.filled.Lightbulb
+import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
@@ -154,6 +153,75 @@ fun HomeScreen(modifier: Modifier, mainViewModel: MainViewModel = viewModel()) {
                             )
                         }
                     }
+                }
+
+                VerticalSpace(modifier = modifier)
+
+                ItemSectionTitle(
+                    modifier = modifier,
+                    leadIcon = Icons.Default.Fastfood,
+                    title = "Try Something New"
+                )
+                VerticalSpace(modifier = modifier)
+
+                //restaurants
+                LazyRow {
+                    item {
+                        restaurantData.forEach { restaurant ->
+                            ItemRestaurantSmall(
+                                modifier = modifier,
+                                restaurant = restaurant,
+                                imageUrl = mainViewModel.getRandomTinyImage()
+                            )
+                        }
+                    }
+                }
+
+                VerticalSpace(modifier = modifier)
+
+                ItemSectionTitle(
+                    modifier = modifier,
+                    leadIcon = Icons.Default.LocalOffer,
+                    title = "Top Offers"
+                )
+
+                VerticalSpace(modifier = modifier)
+
+                //restaurants
+                LazyRow(modifier = modifier.fillMaxWidth()) {
+                    item {
+                        restaurantData.chunked(2).forEach { restaurants ->
+                            ItemRestaurantRow(
+                                modifier = modifier,
+                                restaurants = restaurants,
+                                imageUrls = listOf(
+                                    mainViewModel.getRandomTinyImage(),
+                                    mainViewModel.getRandomTinyImage()
+                                )
+                            )
+                        }
+                    }
+                }
+
+                VerticalSpace(modifier = modifier)
+
+                ItemSectionTitle(
+                    modifier = modifier,
+                    leadIcon = Icons.Default.FreeBreakfast,
+                    title = "All Restaurants Nearby"
+                )
+
+                VerticalSpace(modifier = modifier)
+
+                //restaurants
+                restaurantData.chunked(1).forEach { restaurants ->
+                    ItemRestaurantRow(
+                        modifier = modifier,
+                        restaurants = restaurants,
+                        imageUrls = listOf(
+                            mainViewModel.getRandomTinyImage(),
+                        )
+                    )
                 }
 
                 VerticalSpace(modifier = modifier)
