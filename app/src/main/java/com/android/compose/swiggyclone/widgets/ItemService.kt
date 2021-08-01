@@ -16,9 +16,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.rememberImagePainter
-import com.android.compose.swiggyclone.features.main.MainViewModel
 import com.android.compose.swiggyclone.ui.theme.Typography
 import com.android.compose.swiggyclone.ui.theme.grey
 

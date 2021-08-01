@@ -1,4 +1,4 @@
-package com.android.compose.swiggyclone.features.main
+package com.android.compose.swiggyclone.features
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -28,11 +28,11 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.android.compose.swiggyclone.R
 import com.android.compose.swiggyclone.features.ResourceStatus
+import com.android.compose.swiggyclone.features.home.HomeScreen
 import com.android.compose.swiggyclone.ui.theme.*
 import com.android.compose.swiggyclone.utils.Constants.PER_PAGE_COUNT
 import com.android.compose.swiggyclone.widgets.*
 import dagger.hilt.android.AndroidEntryPoint
-import javax.inject.Inject
 
 
 @AndroidEntryPoint
@@ -81,11 +81,10 @@ private fun SetUpToolbar(modifier: Modifier) {
 @Composable
 fun App(mainViewModel: MainViewModel = viewModel()) {
     SwiggyCloneTheme {
-        val images by mainViewModel.imagesData.observeAsState()
         val modifier = Modifier
         val selectedMenu = remember { mutableStateOf(0) }
         Scaffold(
-            topBar = { SetUpToolbar(modifier) }, bottomBar = {
+            topBar = { if (selectedMenu.value == 0) SetUpToolbar(modifier) }, bottomBar = {
                 BottomNavigation(contentColor = primaryColor) {
                     BottomNavBarItem(
                         modifier = modifier.weight(1f),
@@ -127,106 +126,11 @@ fun App(mainViewModel: MainViewModel = viewModel()) {
                 }
             },
             content = {
-                if ((images?.data != null && images?.resourceStatus == ResourceStatus.SUCCESS)) {
-                    LazyColumn(
-                        contentPadding = PaddingValues(
-                            start = 8.dp,
-                            end = 8.dp,
-                            top = 8.dp,
-                            bottom = 100.dp
-                        ),
-                    ) {
-                        item {
-                            EmptySpace(modifier = modifier)
-
-                            LazyRow {
-                                item {
-                                    listOf(
-                                        "Restaurant",
-                                        "Health Hub",
-                                        "Care Corner",
-                                        "Restaurant",
-                                        "Health Hub",
-                                        "Care Corner"
-                                    ).map { serviceName ->
-                                        ItemServiceType(
-                                            modifier = modifier,
-                                            serviceName = serviceName,
-                                            description = "Enjoy Your favourite treats",
-                                            mainViewModel.getRandomMediumImage()
-                                        )
-                                    }
-                                }
-                            }//end service type
-
-                            EmptySpace(modifier = modifier)
-
-                            ItemBannerTypeOne(modifier = modifier)
-
-                            EmptySpace(modifier = modifier)
-
-                            SectionTitle(title = "Restaurants You love")
-
-                            EmptySpace(modifier = modifier)
-
-                            //restaurants
-                            LazyRow {
-                                item {
-                                    listOf(
-                                        Triple("Muniyandi Vilas", "20 mins", 30),
-                                        Triple("Lamia Multicuisine", "24 mins", 20),
-                                        Triple("Meat and Eat", "35 mins", 10),
-                                        Triple("KFC", "25 mins", 30),
-                                        Triple("Muniyandi Vilas", "20 mins", 30),
-                                        Triple("Lamia Multicuisine", "24 mins", 20),
-                                        Triple("Meat and Eat", "35 mins", 10),
-                                        Triple("KFC", "25 mins", 30),
-                                    ).forEach { restaurant ->
-                                        ItemRestaurantSmall(
-                                            modifier = modifier,
-                                            restaurant = restaurant,
-                                            imageUrl = mainViewModel.getRandomTinyImage()
-                                        )
-                                    }
-                                }
-                            }
-
-                            EmptySpace(modifier = modifier)
-
-                            SectionTitle(title = "Popular Curations")
-
-                            EmptySpace(modifier = modifier)
-
-                            LazyRow {
-                                item {
-                                    listOf(
-                                        "Burgers",
-                                        "South Indian",
-                                        "Pure Veg",
-                                        "North Indian",
-                                        "Burgers",
-                                        "South Indian",
-                                        "Pure Veg",
-                                        "North Indian",
-                                    ).forEach { curationName ->
-                                        ItemPopularCuration(
-                                            modifier = modifier,
-                                            curationName = curationName,
-                                            imageUrl = mainViewModel.getRandomTinyImage()
-                                        )
-                                    }
-                                }
-                            }
-
-                            EmptySpace(modifier = modifier)
-
-                        }
-                    }
+                if (selectedMenu.value == 0) {
+                    HomeScreen(modifier = modifier)
                 } else {
-                    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                        CircularProgressIndicator(
-                            color = secondaryColor
-                        )
+                    Box(modifier = modifier.fillMaxSize()) {
+
                     }
                 }
             }
