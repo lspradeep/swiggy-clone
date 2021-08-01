@@ -1,29 +1,26 @@
 package com.android.compose.swiggyclone.features.home
 
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Lightbulb
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.android.compose.swiggyclone.data.local.restaurantData
 import com.android.compose.swiggyclone.features.MainViewModel
 import com.android.compose.swiggyclone.features.ResourceStatus
-import com.android.compose.swiggyclone.ui.theme.secondaryColor
 import com.android.compose.swiggyclone.widgets.*
 
 @Composable
 fun HomeScreen(modifier: Modifier, mainViewModel: MainViewModel = viewModel()) {
     val images by mainViewModel.imagesData.observeAsState()
-    if ((images?.data != null && images?.resourceStatus == ResourceStatus.SUCCESS)) {
+    if ((images?.data != null && images?.resourceStatus == ResourceStatus.SUCCESS) or images?.data.isNullOrEmpty()) {
         LazyColumn(
             contentPadding = PaddingValues(
                 start = 8.dp,
@@ -61,7 +58,7 @@ fun HomeScreen(modifier: Modifier, mainViewModel: MainViewModel = viewModel()) {
 
                 VerticalSpace(modifier = modifier)
 
-                SectionTitle(
+                ItemSectionTitle(
                     modifier = modifier,
                     leadIcon = Icons.Default.Favorite,
                     title = "Restaurants You love"
@@ -72,16 +69,7 @@ fun HomeScreen(modifier: Modifier, mainViewModel: MainViewModel = viewModel()) {
                 //restaurants
                 LazyRow {
                     item {
-                        listOf(
-                            Triple("Muniyandi Vilas", "20 mins", 30),
-                            Triple("Lamia Multicuisine", "24 mins", 20),
-                            Triple("Meat and Eat", "35 mins", 10),
-                            Triple("KFC", "25 mins", 30),
-                            Triple("Muniyandi Vilas", "20 mins", 30),
-                            Triple("Lamia Multicuisine", "24 mins", 20),
-                            Triple("Meat and Eat", "35 mins", 10),
-                            Triple("KFC", "25 mins", 30),
-                        ).forEach { restaurant ->
+                        restaurantData.forEach { restaurant ->
                             ItemRestaurantSmall(
                                 modifier = modifier,
                                 restaurant = restaurant,
@@ -93,7 +81,7 @@ fun HomeScreen(modifier: Modifier, mainViewModel: MainViewModel = viewModel()) {
 
                 VerticalSpace(modifier = modifier)
 
-                SectionTitle(modifier = modifier, title = "Popular Curations")
+                ItemSectionTitle(modifier = modifier, title = "Popular Curations")
 
                 VerticalSpace(modifier = modifier)
 
@@ -120,13 +108,15 @@ fun HomeScreen(modifier: Modifier, mainViewModel: MainViewModel = viewModel()) {
 
                 VerticalSpace(modifier = modifier)
 
+                ItemSectionTitle(modifier = modifier,leadIcon = Icons.Default.Lightbulb, title = "In the Spotlight!")
+
             }
         }
     } else {
-        Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-            CircularProgressIndicator(
-                color = secondaryColor
-            )
-        }
+//        Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+//            CircularProgressIndicator(
+//                color = secondaryColor
+//            )
+//        }
     }
 }

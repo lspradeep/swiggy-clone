@@ -25,7 +25,7 @@ import com.android.compose.swiggyclone.ui.theme.greyLight
 import com.android.compose.swiggyclone.ui.theme.secondaryColor
 import com.android.compose.swiggyclone.widgets.ItemPopularCuration
 import com.android.compose.swiggyclone.widgets.ItemRecentSearch
-import com.android.compose.swiggyclone.widgets.SectionTitle
+import com.android.compose.swiggyclone.widgets.ItemSectionTitle
 import com.android.compose.swiggyclone.widgets.VerticalSpace
 
 @Composable
@@ -90,7 +90,7 @@ fun SearchScreen(modifier: Modifier, mainViewModel: MainViewModel = viewModel())
 
             VerticalSpace(modifier = modifier)
 
-            SectionTitle(modifier = modifier, title = "Popular Cuisines")
+            ItemSectionTitle(modifier = modifier, title = "Popular Cuisines")
 
             VerticalSpace(modifier = modifier)
 

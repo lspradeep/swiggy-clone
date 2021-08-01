@@ -15,6 +15,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberImagePainter
+import com.android.compose.swiggyclone.data.local.Restaurant
 import com.android.compose.swiggyclone.ui.theme.Typography
 import com.android.compose.swiggyclone.ui.theme.greyLight
 import com.android.compose.swiggyclone.ui.theme.secondaryVariant
@@ -24,7 +25,7 @@ import com.android.compose.swiggyclone.ui.theme.white
 @Composable
 fun ItemRestaurantSmall(
     modifier: Modifier,
-    restaurant: Triple<String, String, Int>,
+    restaurant: Restaurant,
     imageUrl: String?
 ) {
     val itemMaxWidth = 80.dp
@@ -47,7 +48,7 @@ fun ItemRestaurantSmall(
             )
 
             Text(
-                text = "${restaurant.third}% off".uppercase(),
+                text = "${restaurant.offerPercentage}% off".uppercase(),
                 modifier = modifier
                     .background(color = white, shape = RoundedCornerShape(4.dp))
                     .border(width = 1.dp, color = greyLight, shape = RoundedCornerShape(4.dp))
@@ -61,14 +62,14 @@ fun ItemRestaurantSmall(
         }
 
         Text(
-            text = restaurant.first, modifier = modifier
+            text = restaurant.name, modifier = modifier
                 .padding(top = 4.dp),
             style = Typography.caption.copy(fontWeight = FontWeight.Bold), maxLines = 2,
             overflow = TextOverflow.Ellipsis
         )
 
         Text(
-            text = restaurant.second, modifier = modifier
+            text = restaurant.deliveryTime, modifier = modifier
                 .padding(top = 4.dp)
                 .align(alignment = Alignment.Start),
             style = Typography.caption, maxLines = 1,
