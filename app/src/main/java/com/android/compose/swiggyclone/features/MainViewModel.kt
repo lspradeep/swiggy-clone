@@ -26,7 +26,7 @@ class MainViewModel @Inject constructor(private val photosRepository: PhotosRepo
 
     }
 
-    fun getImages(pageNo: Int, perPage: Int, query: String = "indian food items") {
+    fun getImages(pageNo: Int, perPage: Int, query: String = "food") {
         _imagesData.value = Resource.loading()
         viewModelScope.launch {
             val result = photosRepository.getPhotos(pageNo, perPage, query)
