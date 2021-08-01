@@ -28,6 +28,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.android.compose.swiggyclone.R
 import com.android.compose.swiggyclone.features.ResourceStatus
+import com.android.compose.swiggyclone.features.cart.CartScreen
 import com.android.compose.swiggyclone.features.home.HomeScreen
 import com.android.compose.swiggyclone.ui.theme.*
 import com.android.compose.swiggyclone.utils.Constants.PER_PAGE_COUNT
@@ -128,9 +129,11 @@ fun App(mainViewModel: MainViewModel = viewModel()) {
             content = {
                 if (selectedMenu.value == 0) {
                     HomeScreen(modifier = modifier)
+                } else if (selectedMenu.value == 1) {
+                    CartScreen(modifier = modifier)
                 } else {
-                    Box(modifier = modifier.fillMaxSize()) {
-
+                    Box(modifier = modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                        Text(text = "Under construction", style = Typography.h6)
                     }
                 }
             }
