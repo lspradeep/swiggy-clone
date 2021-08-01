@@ -1,6 +1,7 @@
 package com.android.compose.swiggyclone.features.home
 
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.material.icons.Icons
@@ -108,8 +109,29 @@ fun HomeScreen(modifier: Modifier, mainViewModel: MainViewModel = viewModel()) {
 
                 VerticalSpace(modifier = modifier)
 
-                ItemSectionTitle(modifier = modifier,leadIcon = Icons.Default.Lightbulb, title = "In the Spotlight!")
+                ItemSectionTitle(
+                    modifier = modifier,
+                    leadIcon = Icons.Default.Lightbulb,
+                    title = "In the Spotlight!"
+                )
 
+                VerticalSpace(modifier = modifier)
+
+                //restaurants
+                LazyRow(modifier = modifier.fillMaxWidth()) {
+                    item {
+                        restaurantData.chunked(2).forEach { restaurants ->
+                            ItemRestaurantRow(
+                                modifier = modifier,
+                                restaurants = restaurants,
+                                imageUrls = listOf(
+                                    mainViewModel.getRandomTinyImage(),
+                                    mainViewModel.getRandomTinyImage()
+                                )
+                            )
+                        }
+                    }
+                }
             }
         }
     } else {

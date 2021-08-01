@@ -42,8 +42,12 @@ fun SearchScreen(modifier: Modifier, mainViewModel: MainViewModel = viewModel())
             end = 8.dp
         )
     ) {
+
         item {
             VerticalSpace(modifier = modifier)
+        }
+
+        item {
             val searchInput = remember { mutableStateOf("") }
             OutlinedTextField(
                 modifier = modifier
@@ -58,9 +62,13 @@ fun SearchScreen(modifier: Modifier, mainViewModel: MainViewModel = viewModel())
                 placeholder = { Text(text = "Search for restaurants or food") },
                 maxLines = 1,
             )
+        }
 
+        item {
             VerticalSpace(modifier = modifier)
+        }
 
+        item {
             Row {
                 Text(
                     text = "Recent Searches",
@@ -73,7 +81,7 @@ fun SearchScreen(modifier: Modifier, mainViewModel: MainViewModel = viewModel())
                         if (showMore.value) mainViewModel.showMore() else mainViewModel.showLess()
                     },
                     text = if (showMore.value) "Show Less".uppercase() else "Show More".uppercase(),
-                    style = Typography.caption.copy(
+                    style = Typography.body2.copy(
                         fontWeight = FontWeight.ExtraBold,
                         color = secondaryColor
                     ),
@@ -87,9 +95,13 @@ fun SearchScreen(modifier: Modifier, mainViewModel: MainViewModel = viewModel())
                     ItemRecentSearch(modifier = modifier, text = it)
                 }
             }
+        }
 
+        item {
             VerticalSpace(modifier = modifier)
+        }
 
+        item {
             ItemSectionTitle(modifier = modifier, title = "Popular Cuisines")
 
             VerticalSpace(modifier = modifier)
