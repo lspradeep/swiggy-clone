@@ -1,4 +1,4 @@
-package com.android.compose.swiggyclone.features
+package com.android.compose.swiggyclone.features.main
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.android.compose.swiggyclone.data.models.Photo
 import com.android.compose.swiggyclone.data.repository.PhotosRepository
 import com.android.compose.swiggyclone.di.NetworkException
+import com.android.compose.swiggyclone.features.Resource
 import com.android.compose.swiggyclone.utils.Constants.PER_PAGE_COUNT
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch

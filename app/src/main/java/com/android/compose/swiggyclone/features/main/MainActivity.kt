@@ -1,4 +1,4 @@
-package com.android.compose.swiggyclone.features
+package com.android.compose.swiggyclone.features.main
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -27,6 +27,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.android.compose.swiggyclone.R
+import com.android.compose.swiggyclone.features.ResourceStatus
 import com.android.compose.swiggyclone.ui.theme.*
 import com.android.compose.swiggyclone.utils.Constants.PER_PAGE_COUNT
 import com.android.compose.swiggyclone.widgets.*
@@ -44,7 +45,6 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
-
 
 @Composable
 private fun SetUpToolbar(modifier: Modifier) {
@@ -152,7 +152,8 @@ fun App(mainViewModel: MainViewModel = viewModel()) {
                                         ItemServiceType(
                                             modifier = modifier,
                                             serviceName = serviceName,
-                                            description = "Enjoy Your favourite treats"
+                                            description = "Enjoy Your favourite treats",
+                                            mainViewModel.getRandomMediumImage()
                                         )
                                     }
                                 }
@@ -182,7 +183,9 @@ fun App(mainViewModel: MainViewModel = viewModel()) {
                                         Triple("KFC", "25 mins", 30),
                                     ).forEach { restaurant ->
                                         ItemRestaurantSmall(
-                                            modifier = modifier, restaurant = restaurant
+                                            modifier = modifier,
+                                            restaurant = restaurant,
+                                            imageUrl = mainViewModel.getRandomTinyImage()
                                         )
                                     }
                                 }
@@ -208,7 +211,8 @@ fun App(mainViewModel: MainViewModel = viewModel()) {
                                     ).forEach { curationName ->
                                         ItemPopularCuration(
                                             modifier = modifier,
-                                            curationName = curationName
+                                            curationName = curationName,
+                                            imageUrl = mainViewModel.getRandomTinyImage()
                                         )
                                     }
                                 }

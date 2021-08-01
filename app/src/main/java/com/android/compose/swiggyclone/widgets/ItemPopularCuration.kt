@@ -17,7 +17,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.rememberImagePainter
-import com.android.compose.swiggyclone.features.MainViewModel
+import com.android.compose.swiggyclone.features.main.MainViewModel
 import com.android.compose.swiggyclone.ui.theme.Typography
 import com.android.compose.swiggyclone.ui.theme.white
 
@@ -25,7 +25,7 @@ import com.android.compose.swiggyclone.ui.theme.white
 fun ItemPopularCuration(
     modifier: Modifier,
     curationName: String,
-    mainViewModel: MainViewModel = viewModel()
+    imageUrl: String?
 ) {
 
     Column(
@@ -33,7 +33,7 @@ fun ItemPopularCuration(
         modifier = modifier.padding(end = 10.dp)
     ) {
         Image(
-            painter = rememberImagePainter(mainViewModel.getRandomTinyImage()),
+            painter = rememberImagePainter(imageUrl),
             contentDescription = "",
             modifier = modifier
                 .size(80.dp)

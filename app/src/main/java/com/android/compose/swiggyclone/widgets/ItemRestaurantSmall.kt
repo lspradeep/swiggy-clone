@@ -17,7 +17,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.rememberImagePainter
-import com.android.compose.swiggyclone.features.MainViewModel
+import com.android.compose.swiggyclone.features.main.MainViewModel
 import com.android.compose.swiggyclone.ui.theme.Typography
 import com.android.compose.swiggyclone.ui.theme.greyLight
 import com.android.compose.swiggyclone.ui.theme.secondaryVariant
@@ -28,7 +28,7 @@ import com.android.compose.swiggyclone.ui.theme.white
 fun ItemRestaurantSmall(
     modifier: Modifier,
     restaurant: Triple<String, String, Int>,
-    mainViewModel: MainViewModel = viewModel()
+    imageUrl: String?
 ) {
     val context = LocalContext.current
     val itemMaxWidth = 65.dp
@@ -40,7 +40,7 @@ fun ItemRestaurantSmall(
     ) {
         Box {
             Image(
-                rememberImagePainter(mainViewModel.getRandomTinyImage()),
+                rememberImagePainter(imageUrl),
                 contentDescription = "",
                 modifier = modifier
                     .size(itemMaxWidth, itemMaxWidth)

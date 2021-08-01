@@ -18,7 +18,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.rememberImagePainter
-import com.android.compose.swiggyclone.features.MainViewModel
+import com.android.compose.swiggyclone.features.main.MainViewModel
 import com.android.compose.swiggyclone.ui.theme.Typography
 import com.android.compose.swiggyclone.ui.theme.grey
 
@@ -27,7 +27,7 @@ fun ItemServiceType(
     modifier: Modifier,
     serviceName: String,
     description: String,
-    mainViewModel: MainViewModel = viewModel()
+    imageUrl: String?
 ) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -45,7 +45,7 @@ fun ItemServiceType(
                 .height(100.dp)
         ) {
             Image(
-                rememberImagePainter(mainViewModel.getRandomMediumImage()),
+                rememberImagePainter(imageUrl),
                 contentDescription = "",
                 contentScale = ContentScale.Crop,
                 modifier = modifier
