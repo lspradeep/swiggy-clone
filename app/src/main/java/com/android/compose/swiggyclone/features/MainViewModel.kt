@@ -16,6 +16,7 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(private val photosRepository: PhotosRepository) :
     ViewModel() {
 
+    //HomeScreen
     val imagesData: LiveData<Resource<List<Photo>>>
         get() = _imagesData
 
@@ -23,7 +24,6 @@ class MainViewModel @Inject constructor(private val photosRepository: PhotosRepo
 
     init {
         getImages(1, PER_PAGE_COUNT)
-
     }
 
     fun getImages(pageNo: Int, perPage: Int, query: String = "food") {
@@ -53,5 +53,25 @@ class MainViewModel @Inject constructor(private val photosRepository: PhotosRepo
 
     fun getRandomMediumImage(): String? {
         return _imagesData.value?.data?.map { it.source.medium }?.random()
+    }
+
+    //SearchScreen
+    val recentSearches: LiveData<List<String>>
+        get() = _recentSearches
+
+    private val _recentSearches = MutableLiveData<List<String>>()
+
+    fun showLess() {
+        _recentSearches.value = listOf("Meat and Eat", "Zamani Biryani", "Smokey Chimney")
+    }
+
+    fun showMore() {
+        _recentSearches.value = listOf(
+            "Meat and Eat",
+            "Zamani Biryani",
+            "Smokey Chimney",
+            "Hotel Mithra",
+            "Little Diner"
+        )
     }
 }

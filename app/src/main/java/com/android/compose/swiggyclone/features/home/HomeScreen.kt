@@ -31,7 +31,7 @@ fun HomeScreen(modifier: Modifier, mainViewModel: MainViewModel = viewModel()) {
             ),
         ) {
             item {
-                EmptySpace(modifier = modifier)
+                VerticalSpace(modifier = modifier)
 
                 LazyRow {
                     item {
@@ -53,15 +53,15 @@ fun HomeScreen(modifier: Modifier, mainViewModel: MainViewModel = viewModel()) {
                     }
                 }//end service type
 
-                EmptySpace(modifier = modifier)
+                VerticalSpace(modifier = modifier)
 
                 ItemBannerTypeOne(modifier = modifier)
 
-                EmptySpace(modifier = modifier)
+                VerticalSpace(modifier = modifier)
 
                 SectionTitle(title = "Restaurants You love")
 
-                EmptySpace(modifier = modifier)
+                VerticalSpace(modifier = modifier)
 
                 //restaurants
                 LazyRow {
@@ -85,11 +85,11 @@ fun HomeScreen(modifier: Modifier, mainViewModel: MainViewModel = viewModel()) {
                     }
                 }
 
-                EmptySpace(modifier = modifier)
+                VerticalSpace(modifier = modifier)
 
                 SectionTitle(title = "Popular Curations")
 
-                EmptySpace(modifier = modifier)
+                VerticalSpace(modifier = modifier)
 
                 LazyRow {
                     item {
@@ -112,7 +112,7 @@ fun HomeScreen(modifier: Modifier, mainViewModel: MainViewModel = viewModel()) {
                     }
                 }
 
-                EmptySpace(modifier = modifier)
+                VerticalSpace(modifier = modifier)
 
             }
         }

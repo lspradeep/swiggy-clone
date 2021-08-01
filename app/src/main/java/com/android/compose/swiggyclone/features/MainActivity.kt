@@ -5,8 +5,6 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Home
@@ -14,8 +12,6 @@ import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -27,12 +23,10 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.android.compose.swiggyclone.R
-import com.android.compose.swiggyclone.features.ResourceStatus
-import com.android.compose.swiggyclone.features.cart.CartScreen
+import com.android.compose.swiggyclone.features.cart.SearchScreen
 import com.android.compose.swiggyclone.features.home.HomeScreen
 import com.android.compose.swiggyclone.ui.theme.*
 import com.android.compose.swiggyclone.utils.Constants.PER_PAGE_COUNT
-import com.android.compose.swiggyclone.widgets.*
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -95,7 +89,6 @@ fun App(mainViewModel: MainViewModel = viewModel()) {
                         "Home"
                     ) {
                         selectedMenu.value = 0
-                        mainViewModel.getImages(1, PER_PAGE_COUNT)
                     }
                     BottomNavBarItem(
                         modifier = modifier.weight(1f),
@@ -127,13 +120,17 @@ fun App(mainViewModel: MainViewModel = viewModel()) {
                 }
             },
             content = {
-                if (selectedMenu.value == 0) {
-                    HomeScreen(modifier = modifier)
-                } else if (selectedMenu.value == 1) {
-                    CartScreen(modifier = modifier)
-                } else {
-                    Box(modifier = modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                        Text(text = "Under construction", style = Typography.h6)
+                when (selectedMenu.value) {
+                    0 -> {
+                        HomeScreen(modifier = modifier)
+                    }
+                    1 -> {
+                        SearchScreen(modifier = modifier)
+                    }
+                    else -> {
+                        Box(modifier = modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                            Text(text = "Under construction", style = Typography.h6)
+                        }
                     }
                 }
             }

@@ -1,5 +1,5 @@
 package com.android.compose.swiggyclone.utils
 
 object Constants {
-    const val PER_PAGE_COUNT = 80
+    const val PER_PAGE_COUNT = 25
 }
