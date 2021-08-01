@@ -14,23 +14,26 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
-import com.android.compose.swiggyclone.SwiggyCloneApp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import coil.compose.rememberImagePainter
+import com.android.compose.swiggyclone.features.MainViewModel
 import com.android.compose.swiggyclone.ui.theme.Typography
 import com.android.compose.swiggyclone.ui.theme.white
 
 @Composable
-fun ItemPopularCuration(modifier: Modifier, curationName: String) {
-    val context = LocalContext.current
+fun ItemPopularCuration(
+    modifier: Modifier,
+    curationName: String,
+    mainViewModel: MainViewModel = viewModel()
+) {
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier.padding(end = 10.dp)
     ) {
         Image(
-            painter = painterResource(id = (context.applicationContext as SwiggyCloneApp).getFoodImage()),
+            painter = rememberImagePainter(mainViewModel.getRandomTinyImage()),
             contentDescription = "",
             modifier = modifier
                 .size(80.dp)

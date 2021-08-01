@@ -7,6 +7,12 @@ import javax.inject.Inject
 class ApiHelperImpl @Inject constructor(
     private val apiService: ApiService
 ) : ApiHelper {
-    override suspend fun getPhotos(query: String): BaseResponse<List<Photo>> =
-        apiService.getImages(query)
+
+    override suspend fun getImages(
+        pageNo: Int,
+        perPage: Int,
+        query: String
+    ): BaseResponse<List<Photo>> {
+        return apiService.getImages(pageNo, perPage, query)
+    }
 }

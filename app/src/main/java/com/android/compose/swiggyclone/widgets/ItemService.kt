@@ -13,12 +13,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.android.compose.swiggyclone.SwiggyCloneApp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import coil.compose.rememberImagePainter
+import com.android.compose.swiggyclone.features.MainViewModel
 import com.android.compose.swiggyclone.ui.theme.Typography
 import com.android.compose.swiggyclone.ui.theme.grey
 
@@ -26,10 +26,9 @@ import com.android.compose.swiggyclone.ui.theme.grey
 fun ItemServiceType(
     modifier: Modifier,
     serviceName: String,
-    description: String
+    description: String,
+    mainViewModel: MainViewModel = viewModel()
 ) {
-    val context = LocalContext.current
-
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier.padding(end = 10.dp),
@@ -46,10 +45,13 @@ fun ItemServiceType(
                 .height(100.dp)
         ) {
             Image(
-                painter = painterResource(id = (context.applicationContext as SwiggyCloneApp).getRandomImage()),
+                rememberImagePainter(mainViewModel.getRandomMediumImage()),
                 contentDescription = "",
                 contentScale = ContentScale.Crop,
-                modifier = modifier.clip(shape = RoundedCornerShape(16.dp))
+                modifier = modifier
+                    .width(100.dp)
+                    .height(100.dp)
+                    .clip(shape = RoundedCornerShape(16.dp))
             )
 
             Text(

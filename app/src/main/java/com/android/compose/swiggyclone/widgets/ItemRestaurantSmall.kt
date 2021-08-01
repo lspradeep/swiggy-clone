@@ -12,11 +12,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
-import com.android.compose.swiggyclone.SwiggyCloneApp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import coil.compose.rememberImagePainter
+import com.android.compose.swiggyclone.features.MainViewModel
 import com.android.compose.swiggyclone.ui.theme.Typography
 import com.android.compose.swiggyclone.ui.theme.greyLight
 import com.android.compose.swiggyclone.ui.theme.secondaryVariant
@@ -26,7 +27,8 @@ import com.android.compose.swiggyclone.ui.theme.white
 @Composable
 fun ItemRestaurantSmall(
     modifier: Modifier,
-    restaurant: Triple<String, String, Int>
+    restaurant: Triple<String, String, Int>,
+    mainViewModel: MainViewModel = viewModel()
 ) {
     val context = LocalContext.current
     val itemMaxWidth = 65.dp
@@ -38,7 +40,7 @@ fun ItemRestaurantSmall(
     ) {
         Box {
             Image(
-                painter = painterResource(id = (context.applicationContext as SwiggyCloneApp).getFoodImage()),
+                rememberImagePainter(mainViewModel.getRandomTinyImage()),
                 contentDescription = "",
                 modifier = modifier
                     .size(itemMaxWidth, itemMaxWidth)
