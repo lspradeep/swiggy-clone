@@ -13,6 +13,7 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.android.compose.swiggyclone.data.local.couponData
 import com.android.compose.swiggyclone.data.local.restaurantData
 import com.android.compose.swiggyclone.features.MainViewModel
 import com.android.compose.swiggyclone.features.ResourceStatus
@@ -132,8 +133,33 @@ fun HomeScreen(modifier: Modifier, mainViewModel: MainViewModel = viewModel()) {
                         }
                     }
                 }
+
+                VerticalSpace(modifier = modifier)
+
+                ItemSectionTitle(
+                    modifier = modifier,
+                    title = "Coupons For You"
+                )
+                VerticalSpace(modifier = modifier)
+
+                LazyRow {
+                    item {
+                        couponData.forEach {
+                            ItemCoupon(
+                                modifier = modifier,
+                                icon = it.icon,
+                                tint = it.tint,
+                                smallText = it.smallText,
+                                largeText = it.largeText
+                            )
+                        }
+                    }
+                }
+
+                VerticalSpace(modifier = modifier)
             }
         }
+
     } else {
 //        Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
 //            CircularProgressIndicator(
