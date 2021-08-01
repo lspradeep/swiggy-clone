@@ -6,6 +6,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.material.CircularProgressIndicator
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Favorite
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
@@ -59,7 +61,11 @@ fun HomeScreen(modifier: Modifier, mainViewModel: MainViewModel = viewModel()) {
 
                 VerticalSpace(modifier = modifier)
 
-                SectionTitle(title = "Restaurants You love")
+                SectionTitle(
+                    modifier = modifier,
+                    leadIcon = Icons.Default.Favorite,
+                    title = "Restaurants You love"
+                )
 
                 VerticalSpace(modifier = modifier)
 
@@ -87,7 +93,7 @@ fun HomeScreen(modifier: Modifier, mainViewModel: MainViewModel = viewModel()) {
 
                 VerticalSpace(modifier = modifier)
 
-                SectionTitle(title = "Popular Curations")
+                SectionTitle(modifier = modifier, title = "Popular Curations")
 
                 VerticalSpace(modifier = modifier)
 
