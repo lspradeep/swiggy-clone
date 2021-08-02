@@ -1,4 +1,4 @@
-package com.android.compose.swiggyclone.features.cart
+package com.android.compose.swiggyclone.features.search
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
