@@ -80,8 +80,8 @@ fun CartIcon(mainViewModel: MainViewModel = viewModel()) {
                     color = secondaryColor,
                     shape = CircleShape.copy(all = CornerSize(percent = 25))
                 )
-                .size(18.dp)
-                .padding(2.dp)
+                .size(16.dp)
+                .padding(1.dp)
                 .wrapContentSize(),
         )
     }

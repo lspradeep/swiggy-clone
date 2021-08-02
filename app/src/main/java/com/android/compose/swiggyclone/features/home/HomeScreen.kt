@@ -1,14 +1,18 @@
 package com.android.compose.swiggyclone.features.home
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -16,12 +20,13 @@ import com.android.compose.swiggyclone.data.local.couponData
 import com.android.compose.swiggyclone.data.local.restaurantData
 import com.android.compose.swiggyclone.features.MainViewModel
 import com.android.compose.swiggyclone.features.ResourceStatus
+import com.android.compose.swiggyclone.ui.theme.secondaryColor
 import com.android.compose.swiggyclone.widgets.*
 
 @Composable
 fun HomeScreen(modifier: Modifier, mainViewModel: MainViewModel) {
     val images by mainViewModel.imagesData.observeAsState()
-    if ((images?.data != null && images?.resourceStatus == ResourceStatus.SUCCESS) or images?.data.isNullOrEmpty()) {
+    if ((images?.data != null && images?.resourceStatus == ResourceStatus.SUCCESS)) {
         LazyColumn(
             contentPadding = PaddingValues(
                 start = 8.dp,
@@ -229,10 +234,10 @@ fun HomeScreen(modifier: Modifier, mainViewModel: MainViewModel) {
         }
 
     } else {
-//        Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-//            CircularProgressIndicator(
-//                color = secondaryColor
-//            )
-//        }
+        Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+            CircularProgressIndicator(
+                color = secondaryColor
+            )
+        }
     }
 }
