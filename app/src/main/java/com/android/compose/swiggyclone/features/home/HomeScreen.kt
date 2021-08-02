@@ -19,7 +19,7 @@ import com.android.compose.swiggyclone.features.ResourceStatus
 import com.android.compose.swiggyclone.widgets.*
 
 @Composable
-fun HomeScreen(modifier: Modifier, mainViewModel: MainViewModel = viewModel()) {
+fun HomeScreen(modifier: Modifier, mainViewModel: MainViewModel) {
     val images by mainViewModel.imagesData.observeAsState()
     if ((images?.data != null && images?.resourceStatus == ResourceStatus.SUCCESS) or images?.data.isNullOrEmpty()) {
         LazyColumn(

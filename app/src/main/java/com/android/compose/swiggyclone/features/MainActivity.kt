@@ -15,6 +15,7 @@ import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -28,17 +29,20 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.compose.rememberNavController
 import com.android.compose.swiggyclone.R
 import com.android.compose.swiggyclone.features.cart.CartScreen
 import com.android.compose.swiggyclone.features.search.SearchScreen
 import com.android.compose.swiggyclone.features.home.HomeScreen
+import com.android.compose.swiggyclone.features.nav.BottomNavigationBar
+import com.android.compose.swiggyclone.features.nav.NavRoutes
+import com.android.compose.swiggyclone.features.nav.Navigation
 import com.android.compose.swiggyclone.ui.theme.*
 import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -48,8 +52,9 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-private fun SetUpToolbar(modifier: Modifier) {
-    TopAppBar(
+private fun SetUpToolbar(modifier: Modifier, mainViewModel: MainViewModel = viewModel()) {
+    val selectedNavMenuItem = mainViewModel.selectedNavMenuItem.observeAsState()
+    if (selectedNavMenuItem.value?.routeName == NavRoutes.HOME.routeName) TopAppBar(
         elevation = 4.dp,
     ) {
         Text(
@@ -80,130 +85,18 @@ private fun SetUpToolbar(modifier: Modifier) {
 @Preview(showBackground = false)
 @Preview
 @Composable
-fun App(mainViewModel: MainViewModel = viewModel()) {
+fun App() {
     SwiggyCloneTheme {
         val modifier = Modifier
-        val selectedMenu = remember { mutableStateOf(0) }
+        val navController = rememberNavController()
         Scaffold(
-            topBar = { if (selectedMenu.value == 0) SetUpToolbar(modifier) }, bottomBar = {
-                BottomNavigation(contentColor = primaryColor) {
-                    BottomNavBarItem(
-                        modifier = modifier.weight(1f),
-                        0,
-                        selectedMenu.value,
-                        Icons.Default.Home,
-                        "Home"
-                    ) {
-                        selectedMenu.value = 0
-                    }
-                    BottomNavBarItem(
-                        modifier = modifier.weight(1f),
-                        1,
-                        selectedMenu.value,
-                        Icons.Default.Search,
-                        "Search"
-                    ) {
-                        selectedMenu.value = 1
-                    }
-                    BottomNavBarItem(
-                        modifier = modifier.weight(1f),
-                        2,
-                        selectedMenu.value,
-                        Icons.Default.ShoppingCart,
-                        "Cart"
-                    ) {
-                        selectedMenu.value = 2
-                    }
-                    BottomNavBarItem(
-                        modifier = modifier.weight(1f),
-                        3,
-                        selectedMenu.value,
-                        Icons.Default.Person,
-                        "Account"
-                    ) {
-                        selectedMenu.value = 3
-                    }
-                }
+            topBar = { SetUpToolbar(modifier) }, bottomBar = {
+                BottomNavigationBar(navController)
             },
             content = {
-                when (selectedMenu.value) {
-                    0 -> {
-                        HomeScreen(modifier = modifier)
-                    }
-                    1 -> {
-                        SearchScreen(modifier = modifier)
-                    }
-                    2 -> {
-                        CartScreen(modifier = modifier)
-                    }
-                    else -> {
-                        Box(
-                            modifier = modifier.fillMaxSize(),
-                            contentAlignment = Alignment.Center
-                        ) {
-                            Text(text = "Under construction", style = Typography.h6)
-                        }
-                    }
-                }
+                Navigation(navController)
             }
         )
     }
 }
 
-@Composable
-fun BottomNavBarItem(
-    modifier: Modifier,
-    id: Int,
-    selected: Int,
-    icon: ImageVector,
-    title: String,
-    mainViewModel: MainViewModel = viewModel(),
-    callback: (Int) -> Unit,
-) {
-    val color = if (id == selected) secondaryVariant else greyDark
-    Box(
-        contentAlignment = Alignment.Center
-    ) {
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = modifier
-                .align(alignment = Alignment.Center)
-                .clickable {
-                    callback(id)
-                }
-                .size(70.dp),
-            verticalArrangement = Arrangement.Center
-        ) {
-            Icon(
-                imageVector = icon,
-                contentDescription = "",
-                tint = color
-            )
-            Text(text = title.uppercase(), style = Typography.caption.copy(color = color))
-        }
-
-        if (selected != id && id == 2) {
-            Box(
-                contentAlignment = Alignment.TopEnd,
-                modifier = modifier
-                    .size(50.dp)
-                    .background(color = Color.Transparent)
-            ) {
-                Text(
-                    text = "3",
-                    style = Typography.caption.copy(color = white),
-                    modifier = modifier
-                        .align(alignment = Alignment.Center)
-                        .clip(CircleShape)
-                        .background(
-                            color = secondaryColor,
-                            shape = CircleShape.copy(all = CornerSize(percent = 25))
-                        )
-                        .size(18.dp)
-                        .padding(2.dp)
-                        .wrapContentSize(),
-                )
-            }
-        }
-    }
-}

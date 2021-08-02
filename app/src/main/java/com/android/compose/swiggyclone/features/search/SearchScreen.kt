@@ -29,7 +29,7 @@ import com.android.compose.swiggyclone.widgets.ItemSectionTitle
 import com.android.compose.swiggyclone.widgets.VerticalSpace
 
 @Composable
-fun SearchScreen(modifier: Modifier, mainViewModel: MainViewModel = viewModel()) {
+fun SearchScreen(modifier: Modifier, mainViewModel: MainViewModel) {
     val recentSearches = mainViewModel.recentSearches.observeAsState()
     val showMore = remember { mutableStateOf(false) }
     if (showMore.value) mainViewModel.showMore() else mainViewModel.showLess()

@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.android.compose.swiggyclone.data.models.Photo
 import com.android.compose.swiggyclone.data.repository.PhotosRepository
 import com.android.compose.swiggyclone.di.NetworkException
+import com.android.compose.swiggyclone.features.nav.NavRoutes
 import com.android.compose.swiggyclone.utils.Constants.PER_PAGE_COUNT
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -27,14 +28,15 @@ class MainViewModel @Inject constructor(private val photosRepository: PhotosRepo
     }
 
     private fun getImages(pageNo: Int, perPage: Int, query: String = "food") {
+        return
         _imagesData.value = Resource.loading()
         viewModelScope.launch {
-            val result = photosRepository.getPhotos(pageNo, perPage, query)
+            val result = photosRepository?.getPhotos(pageNo, perPage, query)
             try {
-                if (result.data.isNullOrEmpty()) {
+                if (result?.data.isNullOrEmpty()) {
                     _imagesData.value = Resource.empty("")
                 } else {
-                    _imagesData.value = Resource.success(result.data)
+                    _imagesData.value = Resource.success(result?.data)
                 }
             } catch (e: Exception) {
                 if (e is NetworkException) {
@@ -73,5 +75,15 @@ class MainViewModel @Inject constructor(private val photosRepository: PhotosRepo
             "Hotel Mithra",
             "Little Diner"
         )
+    }
+
+    //Cart Counter
+    val selectedNavMenuItem: LiveData<NavRoutes>
+        get() = _selectedNavMenuItem
+
+    private val _selectedNavMenuItem = MutableLiveData<NavRoutes>(NavRoutes.HOME)
+
+    fun selectedNavMenu(selectedNavMenu: NavRoutes) {
+        _selectedNavMenuItem.value = selectedNavMenu
     }
 }
