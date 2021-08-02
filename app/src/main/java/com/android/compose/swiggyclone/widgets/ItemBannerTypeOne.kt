@@ -4,6 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.NavigateNext
@@ -54,12 +55,13 @@ fun ItemBannerTypeOne(modifier: Modifier) {
 
             Spacer(modifier = modifier.height(8.dp))
 
-            Image(
+            Icon(
                 imageVector = Icons.Rounded.NavigateNext,
                 contentDescription = "",
                 modifier = modifier
                     .background(shape = RoundedCornerShape(8.dp), color = white)
                     .padding(start = 2.dp, end = 2.dp),
+                tint = secondaryColor
             )
         }
 

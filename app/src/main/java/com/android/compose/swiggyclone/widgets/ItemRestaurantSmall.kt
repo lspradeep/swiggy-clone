@@ -14,6 +14,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.constraintlayout.compose.ConstraintLayout
 import coil.compose.rememberImagePainter
 import com.android.compose.swiggyclone.data.local.Restaurant
 import com.android.compose.swiggyclone.ui.theme.Typography
@@ -37,11 +38,18 @@ fun ItemRestaurantSmall(
             .padding(end = 10.dp),
         verticalArrangement = Arrangement.Center,
     ) {
-        Box {
+        ConstraintLayout {
+            val (imgId, offerText) = createRefs()
             Image(
                 rememberImagePainter(imageUrl),
                 contentDescription = "",
                 modifier = modifier
+                    .constrainAs(imgId) {
+                        top.linkTo(parent.top)
+                        bottom.linkTo(parent.bottom)
+                        start.linkTo(parent.start)
+                        end.linkTo(parent.end)
+                    }
                     .size(60.dp)
                     .clip(shape = RoundedCornerShape(8.dp)),
                 contentScale = ContentScale.Crop
@@ -50,10 +58,15 @@ fun ItemRestaurantSmall(
             Text(
                 text = "${restaurant.offerPercentage}% off".uppercase(),
                 modifier = modifier
+                    .constrainAs(offerText) {
+                        top.linkTo(parent.bottom)
+                        bottom.linkTo(parent.bottom)
+                        start.linkTo(parent.start)
+                        end.linkTo(parent.end)
+                    }
                     .background(color = white, shape = RoundedCornerShape(4.dp))
                     .border(width = 1.dp, color = greyLight, shape = RoundedCornerShape(4.dp))
-                    .padding(2.dp)
-                    .align(Alignment.BottomCenter),
+                    .padding(2.dp),
                 style = Typography.caption.copy(
                     fontWeight = FontWeight.Bold,
                     color = secondaryVariant
@@ -63,7 +76,7 @@ fun ItemRestaurantSmall(
 
         Text(
             text = restaurant.name, modifier = modifier
-                .padding(top = 4.dp),
+                .padding(top = 8.dp),
             style = Typography.caption.copy(fontWeight = FontWeight.Bold), maxLines = 2,
             overflow = TextOverflow.Ellipsis
         )

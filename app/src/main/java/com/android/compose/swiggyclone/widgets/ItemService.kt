@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.dp
 import coil.compose.rememberImagePainter
 import com.android.compose.swiggyclone.ui.theme.Typography
 import com.android.compose.swiggyclone.ui.theme.grey
+import com.android.compose.swiggyclone.ui.theme.greyDark
 
 @Composable
 fun ItemServiceType(
@@ -40,7 +41,8 @@ fun ItemServiceType(
                     border = BorderStroke(1.dp, color = grey)
                 )
                 .width(100.dp)
-                .height(100.dp)
+                .height(100.dp),
+            contentAlignment = Alignment.Center
         ) {
             Image(
                 rememberImagePainter(imageUrl),
@@ -59,6 +61,7 @@ fun ItemServiceType(
                 modifier = modifier
                     .fillMaxWidth()
                     .padding(4.dp)
+                    .align(alignment = Alignment.TopCenter)
             )
         }
         Text(
@@ -67,7 +70,7 @@ fun ItemServiceType(
                 .padding(8.dp)
                 .width(90.dp),
             textAlign = TextAlign.Center,
-            style = Typography.body2.copy(fontWeight = FontWeight.Light),
+            style = Typography.body2.copy(color = greyDark),
             maxLines = 2
         )
     }
