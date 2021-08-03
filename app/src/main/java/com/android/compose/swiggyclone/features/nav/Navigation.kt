@@ -6,6 +6,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.navigation
 import com.android.compose.swiggyclone.features.MainViewModel
 import com.android.compose.swiggyclone.features.account.AccountScreen
 import com.android.compose.swiggyclone.features.cart.CartScreen
@@ -14,10 +15,12 @@ import com.android.compose.swiggyclone.features.search.SearchScreen
 
 @Composable
 fun Navigation(navController: NavHostController) {
-    NavHost(navController, startDestination = NavRoutes.HOME.routeName) {
+    NavHost(navController, startDestination = NavRoutes.HOME.routeName, route = "Parent") {
         val modifier = Modifier
         composable(NavRoutes.HOME.routeName) {
-            val mainViewModel = hiltViewModel<MainViewModel>()
+            val mainViewModel = hiltViewModel<MainViewModel>(
+                navController.getBackStackEntry(NavRoutes.HOME.routeName)
+            )
             HomeScreen(modifier = modifier, mainViewModel)
         }
         composable(NavRoutes.SEARCH.routeName) {
