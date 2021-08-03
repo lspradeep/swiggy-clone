@@ -1,4 +1,4 @@
-package com.android.compose.swiggyclone.data.models
+package com.android.compose.swiggyclone.data.models.photo
 
 import com.google.gson.annotations.SerializedName
 

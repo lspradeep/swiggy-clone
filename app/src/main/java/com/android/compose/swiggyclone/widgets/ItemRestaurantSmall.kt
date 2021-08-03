@@ -16,7 +16,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import coil.compose.rememberImagePainter
-import com.android.compose.swiggyclone.data.local.Restaurant
+import com.android.compose.swiggyclone.data.models.restaurant.Restaurant
 import com.android.compose.swiggyclone.ui.theme.Typography
 import com.android.compose.swiggyclone.ui.theme.greyLight
 import com.android.compose.swiggyclone.ui.theme.secondaryVariant
@@ -27,7 +27,6 @@ import com.android.compose.swiggyclone.ui.theme.white
 fun ItemRestaurantSmall(
     modifier: Modifier,
     restaurant: Restaurant,
-    imageUrl: String?
 ) {
     val itemMaxWidth = 70.dp
 
@@ -41,7 +40,7 @@ fun ItemRestaurantSmall(
         ConstraintLayout {
             val (imgId, offerText) = createRefs()
             Image(
-                rememberImagePainter(imageUrl),
+                rememberImagePainter(restaurant.image),
                 contentDescription = "",
                 modifier = modifier
                     .constrainAs(imgId) {

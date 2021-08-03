@@ -22,7 +22,7 @@ import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import coil.compose.rememberImagePainter
 import com.android.compose.swiggyclone.R
-import com.android.compose.swiggyclone.data.local.Restaurant
+import com.android.compose.swiggyclone.data.models.restaurant.Restaurant
 import com.android.compose.swiggyclone.ui.theme.*
 import com.android.compose.swiggyclone.utils.Constants.CURRENCY_SYMBOL
 
@@ -30,11 +30,10 @@ import com.android.compose.swiggyclone.utils.Constants.CURRENCY_SYMBOL
 @Composable
 fun ItemRestaurantRow(
     modifier: Modifier,
-    restaurants: List<Restaurant>,
-    imageUrls: List<String?>
+    restaurants: List<Restaurant>
 ) {
     Column {
-        restaurants.forEachIndexed { index, restaurant ->
+        restaurants.forEach { restaurant ->
             Row(
                 modifier = modifier
                     .padding(8.dp)
@@ -44,7 +43,7 @@ fun ItemRestaurantRow(
                     val (imgId, offerText) = createRefs()
 
                     Image(
-                        rememberImagePainter(imageUrls[index]),
+                        rememberImagePainter(restaurant.image),
                         contentDescription = "",
                         modifier = modifier
                             .constrainAs(imgId) {

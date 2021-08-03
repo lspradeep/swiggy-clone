@@ -15,9 +15,6 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
-import com.android.compose.swiggyclone.data.local.couponData
-import com.android.compose.swiggyclone.data.local.restaurantData
 import com.android.compose.swiggyclone.features.MainViewModel
 import com.android.compose.swiggyclone.features.ResourceStatus
 import com.android.compose.swiggyclone.ui.theme.secondaryColor
@@ -26,6 +23,11 @@ import com.android.compose.swiggyclone.widgets.*
 @Composable
 fun HomeScreen(modifier: Modifier, mainViewModel: MainViewModel) {
     val images by mainViewModel.imagesData.observeAsState()
+    val serviceTypes by mainViewModel.serviceTypes.observeAsState()
+    val restaurants by mainViewModel.restaurants.observeAsState()
+    val curations by mainViewModel.curations.observeAsState()
+    val coupons by mainViewModel.coupons.observeAsState()
+
     if ((images?.data != null && images?.resourceStatus == ResourceStatus.SUCCESS)) {
         LazyColumn(
             contentPadding = PaddingValues(
@@ -40,19 +42,12 @@ fun HomeScreen(modifier: Modifier, mainViewModel: MainViewModel) {
 
                 LazyRow {
                     item {
-                        listOf(
-                            "Restaurant",
-                            "Health Hub",
-                            "Care Corner",
-                            "Restaurant",
-                            "Health Hub",
-                            "Care Corner"
-                        ).map { serviceName ->
+                        serviceTypes?.map { service ->
                             ItemServiceType(
                                 modifier = modifier,
-                                serviceName = serviceName,
-                                description = "Enjoy Your favourite treats",
-                                mainViewModel.getRandomMediumImage()
+                                serviceName = service.serviceName,
+                                description = service.description,
+                                imageUrl = service.image
                             )
                         }
                     }
@@ -75,11 +70,10 @@ fun HomeScreen(modifier: Modifier, mainViewModel: MainViewModel) {
                 //restaurants
                 LazyRow {
                     item {
-                        restaurantData.forEach { restaurant ->
+                        restaurants?.forEach { restaurant ->
                             ItemRestaurantSmall(
                                 modifier = modifier,
-                                restaurant = restaurant,
-                                imageUrl = mainViewModel.getRandomTinyImage()
+                                restaurant = restaurant
                             )
                         }
                     }
@@ -93,20 +87,11 @@ fun HomeScreen(modifier: Modifier, mainViewModel: MainViewModel) {
 
                 LazyRow {
                     item {
-                        listOf(
-                            "Burgers",
-                            "South Indian",
-                            "Pure Veg",
-                            "North Indian",
-                            "Burgers",
-                            "South Indian",
-                            "Pure Veg",
-                            "North Indian",
-                        ).forEach { curationName ->
+                        curations?.forEach { curation ->
                             ItemPopularCuration(
                                 modifier = modifier,
-                                curationName = curationName,
-                                imageUrl = mainViewModel.getRandomTinyImage()
+                                curationName = curation.name,
+                                imageUrl = curation.image
                             )
                         }
                     }
@@ -125,14 +110,10 @@ fun HomeScreen(modifier: Modifier, mainViewModel: MainViewModel) {
                 //restaurants
                 LazyRow(modifier = modifier.fillMaxWidth()) {
                     item {
-                        restaurantData.chunked(2).forEach { restaurants ->
+                        restaurants?.chunked(2)?.forEach { restaurants ->
                             ItemRestaurantRow(
                                 modifier = modifier,
-                                restaurants = restaurants,
-                                imageUrls = listOf(
-                                    mainViewModel.getRandomTinyImage(),
-                                    mainViewModel.getRandomTinyImage()
-                                )
+                                restaurants = restaurants
                             )
                         }
                     }
@@ -148,13 +129,13 @@ fun HomeScreen(modifier: Modifier, mainViewModel: MainViewModel) {
 
                 LazyRow {
                     item {
-                        couponData.forEach {
+                        coupons?.forEach { coupon ->
                             ItemCoupon(
                                 modifier = modifier,
-                                icon = it.icon,
-                                tint = it.tint,
-                                smallText = it.smallText,
-                                largeText = it.largeText
+                                icon = coupon.icon,
+                                tint = coupon.tint,
+                                smallText = coupon.smallText,
+                                largeText = coupon.largeText
                             )
                         }
                     }
@@ -172,11 +153,10 @@ fun HomeScreen(modifier: Modifier, mainViewModel: MainViewModel) {
                 //restaurants
                 LazyRow {
                     item {
-                        restaurantData.forEach { restaurant ->
+                        restaurants?.forEach { restaurant ->
                             ItemRestaurantSmall(
                                 modifier = modifier,
-                                restaurant = restaurant,
-                                imageUrl = mainViewModel.getRandomTinyImage()
+                                restaurant = restaurant
                             )
                         }
                     }
@@ -195,14 +175,10 @@ fun HomeScreen(modifier: Modifier, mainViewModel: MainViewModel) {
                 //restaurants
                 LazyRow(modifier = modifier.fillMaxWidth()) {
                     item {
-                        restaurantData.chunked(2).forEach { restaurants ->
+                        restaurants?.chunked(2)?.forEach { restaurants ->
                             ItemRestaurantRow(
                                 modifier = modifier,
-                                restaurants = restaurants,
-                                imageUrls = listOf(
-                                    mainViewModel.getRandomTinyImage(),
-                                    mainViewModel.getRandomTinyImage()
-                                )
+                                restaurants = restaurants
                             )
                         }
                     }
@@ -219,13 +195,10 @@ fun HomeScreen(modifier: Modifier, mainViewModel: MainViewModel) {
                 VerticalSpace(modifier = modifier)
 
                 //restaurants
-                restaurantData.chunked(1).forEach { restaurants ->
+                restaurants?.chunked(1)?.forEach { restaurants ->
                     ItemRestaurantRow(
                         modifier = modifier,
                         restaurants = restaurants,
-                        imageUrls = listOf(
-                            mainViewModel.getRandomTinyImage(),
-                        )
                     )
                 }
 

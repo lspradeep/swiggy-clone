@@ -1,10 +1,9 @@
 package com.android.compose.swiggyclone.data.api
 
 import com.android.compose.swiggyclone.data.models.BaseResponse
-import com.android.compose.swiggyclone.data.models.Photo
+import com.android.compose.swiggyclone.data.models.photo.Photo
 import retrofit2.http.GET
 import retrofit2.http.Query
-import javax.inject.Inject
 
 interface ApiService {
     @GET("search")

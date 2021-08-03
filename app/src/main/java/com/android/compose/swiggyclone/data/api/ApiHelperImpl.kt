@@ -1,7 +1,7 @@
 package com.android.compose.swiggyclone.data.api
 
 import com.android.compose.swiggyclone.data.models.BaseResponse
-import com.android.compose.swiggyclone.data.models.Photo
+import com.android.compose.swiggyclone.data.models.photo.Photo
 import javax.inject.Inject
 
 class ApiHelperImpl @Inject constructor(

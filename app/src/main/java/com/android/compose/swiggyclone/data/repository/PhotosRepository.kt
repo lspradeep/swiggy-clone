@@ -1,9 +1,8 @@
 package com.android.compose.swiggyclone.data.repository
 
 import com.android.compose.swiggyclone.data.api.ApiHelper
-import com.android.compose.swiggyclone.data.api.ApiService
 import com.android.compose.swiggyclone.data.models.BaseResponse
-import com.android.compose.swiggyclone.data.models.Photo
+import com.android.compose.swiggyclone.data.models.photo.Photo
 import javax.inject.Inject
 
 
