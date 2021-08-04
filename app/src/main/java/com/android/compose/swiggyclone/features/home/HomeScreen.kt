@@ -15,13 +15,19 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavController
 import com.android.compose.swiggyclone.features.MainViewModel
 import com.android.compose.swiggyclone.features.ResourceStatus
 import com.android.compose.swiggyclone.ui.theme.secondaryColor
 import com.android.compose.swiggyclone.widgets.*
 
 @Composable
-fun HomeScreen(modifier: Modifier, mainViewModel: MainViewModel) {
+fun HomeScreen(
+    modifier: Modifier,
+    navController: NavController,
+    mainViewModel: MainViewModel
+) {
     val images by mainViewModel.imagesData.observeAsState()
     val serviceTypes by mainViewModel.serviceTypes.observeAsState()
     val allRestaurants by mainViewModel.allRestaurants.observeAsState()
@@ -117,7 +123,8 @@ fun HomeScreen(modifier: Modifier, mainViewModel: MainViewModel) {
                         inTheSpotlight?.chunked(2)?.forEach { restaurants ->
                             ItemRestaurantRow(
                                 modifier = modifier,
-                                restaurants = restaurants
+                                restaurants = restaurants,
+                                navController = navController
                             )
                         }
                     }
@@ -182,7 +189,8 @@ fun HomeScreen(modifier: Modifier, mainViewModel: MainViewModel) {
                         topOffers?.chunked(2)?.forEach { restaurants ->
                             ItemRestaurantRow(
                                 modifier = modifier,
-                                restaurants = restaurants
+                                restaurants = restaurants,
+                                navController = navController
                             )
                         }
                     }
@@ -203,6 +211,7 @@ fun HomeScreen(modifier: Modifier, mainViewModel: MainViewModel) {
                     ItemRestaurantRow(
                         modifier = modifier,
                         restaurants = restaurants,
+                        navController = navController
                     )
                 }
 

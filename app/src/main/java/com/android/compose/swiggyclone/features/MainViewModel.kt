@@ -16,7 +16,7 @@ import com.android.compose.swiggyclone.data.models.servicetype.ServiceType
 import com.android.compose.swiggyclone.data.models.photo.Photo
 import com.android.compose.swiggyclone.data.repository.PhotosRepository
 import com.android.compose.swiggyclone.di.NetworkException
-import com.android.compose.swiggyclone.features.nav.NavRoutes
+import com.android.compose.swiggyclone.features.nav.Routes
 import com.android.compose.swiggyclone.ui.theme.couponColor1
 import com.android.compose.swiggyclone.ui.theme.couponColor2
 import com.android.compose.swiggyclone.ui.theme.couponColor3
@@ -330,12 +330,23 @@ class MainViewModel @Inject constructor(private val photosRepository: PhotosRepo
     }
 
     //Cart Counter
-    val selectedNavMenuItem: LiveData<NavRoutes>
+    val selectedMenuItem: LiveData<Routes>
         get() = _selectedNavMenuItem
 
-    private val _selectedNavMenuItem = MutableLiveData<NavRoutes>(NavRoutes.HOME)
+    private val _selectedNavMenuItem = MutableLiveData<Routes>(Routes.HOME)
 
-    fun selectedNavMenu(selectedNavMenu: NavRoutes) {
-        _selectedNavMenuItem.value = selectedNavMenu
+    //testing purpose
+    val incrementCartCount: LiveData<Int>
+        get() = _incrementCartCount
+
+    private val _incrementCartCount = MutableLiveData<Int>(0)
+
+    fun incrementCartCounter() {
+        _incrementCartCount.value = _incrementCartCount.value?.plus(1)
+    }
+    //end test
+
+    fun selectedNavMenu(selectedMenu: Routes) {
+        _selectedNavMenuItem.value = selectedMenu
     }
 }

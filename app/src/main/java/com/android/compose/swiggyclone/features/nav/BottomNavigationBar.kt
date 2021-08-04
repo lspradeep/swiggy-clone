@@ -16,10 +16,10 @@ import com.android.compose.swiggyclone.ui.theme.white
 @Composable
 fun BottomNavigationBar(navController: NavController, mainViewModel: MainViewModel = viewModel()) {
     val items = listOf(
-        NavigationItem.Home,
-        NavigationItem.Search,
-        NavigationItem.Cart,
-        NavigationItem.Account,
+        BottomNavigationItem.Home,
+        BottomNavigationItem.Search,
+        BottomNavigationItem.Cart,
+        BottomNavigationItem.Account,
     )
     BottomNavigation(
         backgroundColor = white,
@@ -39,6 +39,7 @@ fun BottomNavigationBar(navController: NavController, mainViewModel: MainViewMod
                     if (currentRoute == item.route.routeName){
                         return@BottomNavigationItem
                     }
+                    mainViewModel.incrementCartCounter()
                     mainViewModel.selectedNavMenu(item.route)
                     navController.navigate(item.route.routeName) {
                         // Pop up to the start destination of the graph to

@@ -25,29 +25,22 @@ import com.android.compose.swiggyclone.ui.theme.Typography
 import com.android.compose.swiggyclone.ui.theme.secondaryColor
 import com.android.compose.swiggyclone.ui.theme.white
 
-enum class NavRoutes(val routeName: String) {
-    HOME("Home"),
-    SEARCH("Search"),
-    CART("Cart"),
-    ACCOUNT("Account")
-}
-
-sealed class NavigationItem(
-    var route: NavRoutes,
+sealed class BottomNavigationItem(
+    var route: Routes,
     var customIcon: @Composable () -> Unit,
 ) {
     object Home :
-        NavigationItem(NavRoutes.HOME, { Icon(Icons.Default.Home, "") })
+        BottomNavigationItem(Routes.HOME, { Icon(Icons.Default.Home, "") })
 
     object Search :
-        NavigationItem(NavRoutes.SEARCH, { Icon(Icons.Default.Search, "") })
+        BottomNavigationItem(Routes.SEARCH, { Icon(Icons.Default.Search, "") })
 
     object Cart :
-        NavigationItem(NavRoutes.CART, { CartIcon() })
+        BottomNavigationItem(Routes.CART, { CartIcon() })
 
     object Account :
-        NavigationItem(
-            NavRoutes.ACCOUNT,
+        BottomNavigationItem(
+            Routes.ACCOUNT,
             { Icon(Icons.Default.Person, "") },
         )
 }
@@ -55,7 +48,8 @@ sealed class NavigationItem(
 @Composable
 fun CartIcon(mainViewModel: MainViewModel = viewModel()) {
     val modifier = Modifier
-    val selectedNavMenuItem = mainViewModel.selectedNavMenuItem.observeAsState()
+    val selectedNavMenuItem = mainViewModel.selectedMenuItem.observeAsState()
+    val cartIncrement = mainViewModel.incrementCartCount.observeAsState()
     ConstraintLayout {
         val (iconId, counterId) = createRefs()
         Icon(Icons.Default.ShoppingCart, "", modifier = modifier.constrainAs(iconId) {
@@ -65,8 +59,8 @@ fun CartIcon(mainViewModel: MainViewModel = viewModel()) {
             end.linkTo(parent.end)
         })
 
-        if (selectedNavMenuItem.value?.routeName != NavRoutes.CART.routeName) Text(
-            text = "3",
+        if (selectedNavMenuItem.value?.routeName != Routes.CART.routeName) Text(
+            text = "${cartIncrement.value}",
             style = Typography.caption.copy(color = white),
             modifier = modifier
                 .constrainAs(counterId) {

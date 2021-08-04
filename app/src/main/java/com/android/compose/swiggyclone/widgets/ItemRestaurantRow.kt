@@ -3,6 +3,7 @@ package com.android.compose.swiggyclone.widgets
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Divider
@@ -20,9 +21,11 @@ import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
+import androidx.navigation.NavController
 import coil.compose.rememberImagePainter
 import com.android.compose.swiggyclone.R
 import com.android.compose.swiggyclone.data.models.restaurant.Restaurant
+import com.android.compose.swiggyclone.features.nav.Routes
 import com.android.compose.swiggyclone.ui.theme.*
 import com.android.compose.swiggyclone.utils.Constants.CURRENCY_SYMBOL
 
@@ -30,9 +33,12 @@ import com.android.compose.swiggyclone.utils.Constants.CURRENCY_SYMBOL
 @Composable
 fun ItemRestaurantRow(
     modifier: Modifier,
-    restaurants: List<Restaurant>
+    restaurants: List<Restaurant>,
+    navController: NavController
 ) {
-    Column {
+    Column(modifier = modifier.clickable {
+        navController.navigate(Routes.RESTAURANT_DETAIL.routeName)
+    }) {
         restaurants.forEach { restaurant ->
             Row(
                 modifier = modifier
