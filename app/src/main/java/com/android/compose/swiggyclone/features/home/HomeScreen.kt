@@ -24,7 +24,11 @@ import com.android.compose.swiggyclone.widgets.*
 fun HomeScreen(modifier: Modifier, mainViewModel: MainViewModel) {
     val images by mainViewModel.imagesData.observeAsState()
     val serviceTypes by mainViewModel.serviceTypes.observeAsState()
-    val restaurants by mainViewModel.restaurants.observeAsState()
+    val allRestaurants by mainViewModel.allRestaurants.observeAsState()
+    val restaurantsYouLove by mainViewModel.restaurantsYouLove.observeAsState()
+    val inTheSpotlight by mainViewModel.inTheSpotlight.observeAsState()
+    val trySomethingNew by mainViewModel.trySomethingNew.observeAsState()
+    val topOffers by mainViewModel.topOffers.observeAsState()
     val curations by mainViewModel.curations.observeAsState()
     val coupons by mainViewModel.coupons.observeAsState()
 
@@ -70,7 +74,7 @@ fun HomeScreen(modifier: Modifier, mainViewModel: MainViewModel) {
                 //restaurants
                 LazyRow {
                     item {
-                        restaurants?.forEach { restaurant ->
+                        restaurantsYouLove?.forEach { restaurant ->
                             ItemRestaurantSmall(
                                 modifier = modifier,
                                 restaurant = restaurant
@@ -110,7 +114,7 @@ fun HomeScreen(modifier: Modifier, mainViewModel: MainViewModel) {
                 //restaurants
                 LazyRow(modifier = modifier.fillMaxWidth()) {
                     item {
-                        restaurants?.chunked(2)?.forEach { restaurants ->
+                        inTheSpotlight?.chunked(2)?.forEach { restaurants ->
                             ItemRestaurantRow(
                                 modifier = modifier,
                                 restaurants = restaurants
@@ -153,7 +157,7 @@ fun HomeScreen(modifier: Modifier, mainViewModel: MainViewModel) {
                 //restaurants
                 LazyRow {
                     item {
-                        restaurants?.forEach { restaurant ->
+                        trySomethingNew?.forEach { restaurant ->
                             ItemRestaurantSmall(
                                 modifier = modifier,
                                 restaurant = restaurant
@@ -175,7 +179,7 @@ fun HomeScreen(modifier: Modifier, mainViewModel: MainViewModel) {
                 //restaurants
                 LazyRow(modifier = modifier.fillMaxWidth()) {
                     item {
-                        restaurants?.chunked(2)?.forEach { restaurants ->
+                        topOffers?.chunked(2)?.forEach { restaurants ->
                             ItemRestaurantRow(
                                 modifier = modifier,
                                 restaurants = restaurants
@@ -195,7 +199,7 @@ fun HomeScreen(modifier: Modifier, mainViewModel: MainViewModel) {
                 VerticalSpace(modifier = modifier)
 
                 //restaurants
-                restaurants?.chunked(1)?.forEach { restaurants ->
+                allRestaurants?.chunked(1)?.forEach { restaurants ->
                     ItemRestaurantRow(
                         modifier = modifier,
                         restaurants = restaurants,

@@ -74,9 +74,25 @@ class MainViewModel @Inject constructor(private val photosRepository: PhotosRepo
         get() = _serviceTypes
     private val _serviceTypes = MutableLiveData<List<ServiceType>?>()
 
-    val restaurants: LiveData<List<Restaurant>?>
-        get() = _restaurants
-    private val _restaurants = MutableLiveData<List<Restaurant>?>()
+    val allRestaurants: LiveData<List<Restaurant>?>
+        get() = _allRestaurants
+    private val _allRestaurants = MutableLiveData<List<Restaurant>?>()
+
+    val restaurantsYouLove: LiveData<List<Restaurant>?>
+        get() = _restaurantsYouLove
+    private val _restaurantsYouLove = MutableLiveData<List<Restaurant>?>()
+
+    val inTheSpotlight: LiveData<List<Restaurant>?>
+        get() = _inTheSpotlight
+    private val _inTheSpotlight = MutableLiveData<List<Restaurant>?>()
+
+    val trySomethingNew: LiveData<List<Restaurant>?>
+        get() = _trySomethingNew
+    private val _trySomethingNew = MutableLiveData<List<Restaurant>?>()
+
+    val topOffers: LiveData<List<Restaurant>?>
+        get() = _topOffers
+    private val _topOffers = MutableLiveData<List<Restaurant>?>()
 
     val curations: LiveData<List<Curation>?>
         get() = _curations
@@ -84,7 +100,7 @@ class MainViewModel @Inject constructor(private val photosRepository: PhotosRepo
 
     val coupons: LiveData<List<Coupon>?>
         get() = _coupons
-    private val _coupons= MutableLiveData<List<Coupon>?>()
+    private val _coupons = MutableLiveData<List<Coupon>?>()
 
     private fun constructFakeDataSet() {
         val serviceTypesData = listOf(
@@ -283,7 +299,11 @@ class MainViewModel @Inject constructor(private val photosRepository: PhotosRepo
         )
 
         _serviceTypes.value = serviceTypesData
-        _restaurants.value = restaurantsData
+        _allRestaurants.value = restaurantsData
+        _restaurantsYouLove.value = restaurantsData.shuffled()
+        _inTheSpotlight.value = restaurantsData.shuffled()
+        _trySomethingNew.value = restaurantsData.shuffled()
+        _topOffers.value = restaurantsData.shuffled()
         _curations.value = curationsData
         _coupons.value = couponsData
     }
